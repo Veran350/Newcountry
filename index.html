@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEWCOUNTRY Construction</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a href="admin.html">Admin</a>
+    </nav>
+
+    <div class="project-grid" id="projectsContainer"></div>
+
+    <section id="contact" style="text-align: center;">
+        <a href="https://wa.me/8038045949" class="whatsapp-btn">
+            Contact Us on WhatsApp
+        </a>
+    </section>
+
+    <script>
+        let projects = JSON.parse(localStorage.getItem('projects')) || [];
+
+        function renderProjects() {
+            const container = document.getElementById('projectsContainer');
+            container.innerHTML = projects.map(project => `
+                <div class="project-card">
+                    <img src="${project.image}" class="project-media" alt="${project.title}">
+                    <div class="project-info">
+                        <h3>${project.title}</h3>
+                        <p>${project.description}</p>
+                        <p><strong>Price:</strong> $${project.price.toLocaleString()}</p>
+                        <p><em>${project.category}</em></p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', renderProjects);
+    </script>
+</body>
+</html>
