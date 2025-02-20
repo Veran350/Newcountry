@@ -1,4 +1,3 @@
-<!-- upload.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,39 +12,45 @@
 <body>
   <header>
     <img src="https://i.imgur.com/jGRsVmw.jpeg" alt="NEWCOUNTRY Logo" class="logo" />
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="address.html">Address</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </header>
   <main>
     <h1>Upload New Project</h1>
-    <!-- Simple password protection -->
+    <!-- Password section: Only you (admin) can enter the password -->
     <div id="passwordSection">
-      <label for="adminPassword">Enter Password:</label>
+      <label for="adminPassword">Enter Admin Password:</label>
       <input type="password" id="adminPassword" placeholder="Password">
       <button onclick="checkPassword()">Submit</button>
     </div>
+    <!-- Upload form: hidden until admin is authenticated -->
     <div id="uploadForm" style="display:none;">
       <form onsubmit="event.preventDefault(); uploadProject();">
-        <label>File (Image/Video):</label>
+        <label for="fileInput">File (Image/Video):</label>
         <input type="file" id="fileInput" accept="image/*,video/*" required>
-        <label>Description:</label>
+        <br>
+        <label for="descriptionInput">Description:</label>
         <input type="text" id="descriptionInput" placeholder="Project Description" required>
-        <label>Price:</label>
+        <br>
+        <label for="priceInput">Price:</label>
         <input type="text" id="priceInput" placeholder="Price" required>
-        <button type="submit">Upload</button>
+        <br>
+        <button type="submit">Upload Project</button>
       </form>
+      <br>
+      <button onclick="logoutAdmin()">Logout Admin</button>
     </div>
   </main>
+  <script src="js/main.js"></script>
   <script>
-    // Simple password check (password is "admin123")
-    function checkPassword() {
-      const pwd = document.getElementById("adminPassword").value;
-      if (pwd === "admin123") {
-        document.getElementById("passwordSection").style.display = "none";
-        document.getElementById("uploadForm").style.display = "block";
-      } else {
-        alert("Incorrect password!");
-      }
+    // If admin already logged in, show the upload form immediately
+    if (localStorage.getItem("isAdmin") === "true") {
+      document.getElementById("passwordSection").style.display = "none";
+      document.getElementById("uploadForm").style.display = "block";
     }
   </script>
-  <script src="js/main.js"></script>
 </body>
 </html>
