@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +16,8 @@
       <a href="index.html">Home</a>
       <a href="address.html">Address</a>
       <a href="contact.html">Contact</a>
+      <!-- Admin link (only visible if logged in) -->
+      <span id="adminLink"></span>
     </nav>
   </header>
   <main>
@@ -26,5 +27,11 @@
     </div>
   </main>
   <script src="js/main.js"></script>
+  <script>
+    // If admin is logged in, show the admin upload link in header
+    if (localStorage.getItem("isAdmin") === "true") {
+      document.getElementById("adminLink").innerHTML = `<a href="upload.html">Admin Upload</a>`;
+    }
+  </script>
 </body>
 </html>
